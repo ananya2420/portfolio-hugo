@@ -1,0 +1,38 @@
+name: "Ananya Chakraborty Gourab"
+title: "Full-Stack Web Developer"
+bio: "Passionate about building performant, responsive, and scalable web applications across the full JavaScript ecosystem."
+location: "Dhaka, Bangladesh"
+email: "contact@example.com"
+github: "https://github.com/Ananya-Chakraborty-Gourab"
+linkedin: "https://linkedin.com"
+
+skills:
+  - category: "Frontend Development"
+    items: ["HTML5", "CSS3 / Tailwind", "JavaScript (ES6+)", "React.js", "Next.js"]
+  - category: "Backend Development"
+    items: ["Node.js", "Express.js", "JWT / Authentication", "REST APIs"]
+  - category: "Database & Tools"
+    items: ["MongoDB / Mongoose", "Git / GitHub", "Vercel / Netlify", "Stripe Integration"]
+
+projects:
+  - name: "RecipeHub"
+    badge: "MERN Stack"
+    description: "Full-stack recipe sharing platform featuring secure user authentication, recipe management, admin dashboard, and integrated Stripe payment processing."
+    live_link: "https://recipe-hub-client-dae3c.web.app/"
+    client_repo: "https://github.com/Ananya-Chakraborty-Gourab/RecipeHub-Client-Side"
+    server_repo: "https://github.com/Ananya-Chakraborty-Gourab/RecipeHub-Server-Side"
+
+  - name: "AdoptPet"
+    badge: "Next.js & MERN"
+    description: "Comprehensive pet adoption platform built with Next.js, JWT authentication with HTTPOnly cookies, interactive metric dashboard counter cards, and custom adoption request management panels."
+    live_link: "https://adopt-pet-nine.vercel.app/"
+    client_repo: "https://github.com/Ananya-Chakraborty-Gourab/AdoptPet-Client-Side"
+    server_repo: "https://github.com/Ananya-Chakraborty-Gourab/AdoptPet-Server-Side"
+
+education:
+  - type: "Bachelor Degree"
+    institution: "Independent University, Bangladesh"
+    detail: "B.Sc. in Computer Science & Engineering"
+  - type: "Professional Certificate"
+    institution: "Programming Hero"
+    detail: "Complete Web Development Program"

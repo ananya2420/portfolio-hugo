@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth bg-gray-950 text-gray-100">
+{{ partial "head.html" . }}
+<body x-data="{ 
+  selectedProject: null, 
+  activeFilter: 'all',
+  showCertModal: false,
+  showScrollTop: false 
+}" 
+@scroll.window="showScrollTop = (window.pageYOffset > 400)">
+
+  {{ partial "navbar.html" . }}
+
+  <!-- Hero Section -->
+  <section id="about" class="relative max-w-6xl mx-auto px-4 py-24 md:py-32 flex flex-col md:flex-row items-center justify-between gap-12 overflow-hidden">
+    <!-- Background Glow Decor -->
+    <div class="absolute -top-10 -left-10 w-72 h-72 bg-indigo-600/15 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute bottom-0 right-0 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="flex-1 text-center md:text-left z-10">
+      <div class="inline-flex items-center gap-2 px-3 me-2 py-1 rounded-full bg-indigo-950/60 border border-indigo-700/50 text-indigo-400 text-xs font-semibold uppercase tracking-wider mb-6">
+        <span class="w-2 h-2 rounded-full bg-indigo-400 animate-pulse"></span>
+        Available for Hire & Freelance
+      </div>
+
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-tight">
+        Hi, I'm <span class="bg-gradient-to-r from-indigo-400 via-indigo-300 to-purple-400 bg-clip-text text-transparent">{{ .Site.Data.portfolio.name }}</span>
+      </h1>
+      
+      <p class="text-xl md:text-2xl text-indigo-400 mt-3 font-semibold">{{ .Site.Data.portfolio.title }}</p>
+      
+      <p class="text-gray-400 mt-6 max-w-2xl text-lg leading-relaxed">
+        {{ .Site.Data.portfolio.bio }}
+      </p>
+
+      <div class="mt-10 flex flex-wrap justify-center md:justify-start gap-4">
+        <a href="#projects" class="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-7 py-3.5 rounded-xl shadow-lg shadow-indigo-600/25 hover:shadow-indigo-500/40 transition transform hover:-translate-y-0.5">
+          Explore Projects
+        </a>
+        <a href="#contact" class="border border-gray-700 hover:border-gray-500 bg-gray-900/60 text-gray-300 hover:text-white px-7 py-3.5 rounded-xl font-semibold transition transform hover:-translate-y-0.5">
+          Get in Touch
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technical Skills Section -->
+  <section id="skills" class="bg-gray-900/80 py-24 border-y border-gray-800/80 relative">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="text-center max-w-2xl mx-auto">
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Technical Proficiency</h2>
+        <p class="text-gray-400 mt-3 text-lg">A breakdown of my technical stack and tools I use to deliver performant web applications.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-14">
+        {{ range .Site.Data.portfolio.skills }}
+        <div class="bg-gray-800/60 p-8 rounded-2xl border border-gray-700/60 hover:border-indigo-500/50 transition duration-300 shadow-xl group">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-10 h-10 rounded-lg bg-indigo-900/50 border border-indigo-700/50 flex items-center justify-center text-indigo-400 font-bold">
+              ⚡
+            </div>
+            <h3 class="text-xl font-bold text-white group-hover:text-indigo-400 transition">{{ .category }}</h3>
+          </div>
+          <ul class="space-y-3">
+            {{ range .items }}
+            <li class="flex items-center gap-3 text-gray-300 text-base">
+              <span class="w-5 h-5 rounded-full bg-indigo-950 border border-indigo-700/60 flex items-center justify-center text-indigo-400 text-xs font-bold">✓</span>
+              <span>{{ . }}</span>
+            </li>
+            {{ end }}
+          </ul>
+        </div>
+        {{ end }}
+      </div>
+    </div>
+  </section>
+
+  <!-- Professional Experience Section -->
+  <section id="experience" class="max-w-6xl mx-auto px-4 py-24">
+    <div class="text-center max-w-2xl mx-auto">
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Professional Experience</h2>
+      <p class="text-gray-400 mt-3 text-lg">Hands-on industry training and web development experience.</p>
+    </div>
+
+    <div class="max-w-3xl mx-auto mt-14">
+      <div class="bg-gray-900 border border-gray-800 p-8 rounded-2xl relative shadow-xl hover:border-indigo-500/40 transition duration-300">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-4">
+          <div>
+            <h3 class="text-2xl font-bold text-white">Brain Station 23</h3>
+            <p class="text-indigo-400 font-semibold text-lg">Trainee</p>
+          </div>
+          <span class="bg-indigo-950 text-indigo-300 text-xs font-semibold px-3.5 py-1.5 rounded-full border border-indigo-800/60">
+            Duration: 6 months
+          </span>
+        </div>
+        <ul class="space-y-3 text-gray-300 text-base mt-4 list-disc list-inside marker:text-indigo-400">
+          <li>Engaged in React and Next.js development to build modern, responsive web interfaces.</li>
+          <li>Practiced advanced JavaScript concepts and utilized Git/GitHub for effective version control.</li>
+          <li>Developed complete web projects from scratch during the professional training programme.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Projects Section -->
+  <section id="projects" class="bg-gray-900/80 py-24 border-t border-gray-800">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="text-center max-w-2xl mx-auto">
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Featured Projects</h2>
+        <p class="text-gray-400 mt-3 text-lg">Real-world full-stack web applications engineered for performance and user experience.</p>
+      </div>
+
+      <!-- Project Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-14">
+        <!-- AdoptPet Project Card -->
+        <div class="bg-gray-900 border border-gray-800 hover:border-indigo-500/40 p-8 rounded-2xl flex flex-col justify-between transition-all duration-300 hover:shadow-2xl hover:shadow-indigo-950/50 group">
+          <div>
+            <div class="flex justify-between items-start gap-4">
+              <span class="text-xs uppercase tracking-wider bg-indigo-950 text-indigo-400 px-3 py-1 rounded-full font-bold border border-indigo-800/60">
+                Full-Stack App
+              </span>
+            </div>
+
+            <h3 class="text-2xl font-bold mt-5 text-white group-hover:text-indigo-400 transition">AdoptPet</h3>
+            <p class="text-gray-400 mt-3 leading-relaxed text-base">A web platform designed to streamline pet adoption, connecting users with available pets and management features.</p>
+          </div>
+
+          <div class="mt-8 pt-5 border-t border-gray-800/80 flex items-center justify-between text-sm font-semibold">
+            <a href="https://adoptpet-client.vercel.app" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-indigo-400 hover:text-indigo-300 transition">
+              <span>Live Demo</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+            </a>
+
+            <div class="flex items-center gap-4 text-gray-400 text-xs">
+              <a href="https://github.com/ananya2420/adoptpet-client" target="_blank" rel="noopener noreferrer" class="hover:text-white transition underline underline-offset-4 decoration-gray-700">Client Code</a>
+              <a href="https://github.com/ananya2420/adoptpet-server" target="_blank" rel="noopener noreferrer" class="hover:text-white transition underline underline-offset-4 decoration-gray-700">Server Code</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- RecipeHub Project Card -->
+        <div class="bg-gray-900 border border-gray-800 hover:border-indigo-500/40 p-8 rounded-2xl flex flex-col justify-between transition-all duration-300 hover:shadow-2xl hover:shadow-indigo-950/50 group">
+          <div>
+            <div class="flex justify-between items-start gap-4">
+              <span class="text-xs uppercase tracking-wider bg-indigo-950 text-indigo-400 px-3 py-1 rounded-full font-bold border border-indigo-800/60">
+                Full-Stack App
+              </span>
+            </div>
+
+            <h3 class="text-2xl font-bold mt-5 text-white group-hover:text-indigo-400 transition">RecipeHub</h3>
+            <p class="text-gray-400 mt-3 leading-relaxed text-base">An interactive recipe sharing platform allowing culinary enthusiasts to discover, post, and organize recipes.</p>
+          </div>
+
+          <div class="mt-8 pt-5 border-t border-gray-800/80 flex items-center justify-between text-sm font-semibold">
+            <a href="https://recipeshub-client.vercel.app" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-indigo-400 hover:text-indigo-300 transition">
+              <span>Live Demo</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+            </a>
+
+            <div class="flex items-center gap-4 text-gray-400 text-xs">
+              <a href="https://github.com/ananya2420/recipeshub-client" target="_blank" rel="noopener noreferrer" class="hover:text-white transition underline underline-offset-4 decoration-gray-700">Client Code</a>
+              <a href="https://github.com/ananya2420/recipshub-server" target="_blank" rel="noopener noreferrer" class="hover:text-white transition underline underline-offset-4 decoration-gray-700">Server Code</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education & Certifications Section -->
+  <section id="education" class="py-24 border-t border-gray-800">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="text-center max-w-2xl mx-auto">
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Education & Certifications</h2>
+        <p class="text-gray-400 mt-3 text-lg">Academic background and verified professional credentials.</p>
+      </div>
+
+      <div class="max-w-3xl mx-auto mt-14 space-y-6">
+        <!-- Programming Hero Featured Certification Card -->
+        <div class="bg-gray-800/60 p-8 rounded-2xl border border-gray-700/60 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 shadow-xl hover:border-indigo-500/50 transition">
+          <div>
+            <span class="inline-block text-xs uppercase tracking-wider text-indigo-400 font-extrabold bg-indigo-950/80 px-3 py-1 rounded-md border border-indigo-700/50 mb-2">
+              Professional Certificate
+            </span>
+            <h3 class="text-2xl font-bold text-white">Programming Hero</h3>
+            <p class="text-indigo-300 font-medium mt-1">Complete Web Development Course with Excellence</p>
+          </div>
+
+          <a href="https://drive.google.com/file/d/1nsjCAfGBOyIjPUJD-42tmy7ed067dGtO/view?usp=drivesdk" 
+             target="_blank" rel="noopener noreferrer" 
+             class="whitespace-nowrap bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-5 py-2.5 rounded-xl text-sm transition shadow-md hover:shadow-indigo-500/25 flex items-center gap-2">
+            <span>View Certificate</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+          </a>
+        </div>
+
+        <!-- Additional items dynamic loop (filters out any extra Programming Hero entry if present in portfolio.yaml) -->
+        {{ range .Site.Data.portfolio.education }}
+        {{ if not (hasPrefix .institution "Programming Hero") }}
+        <div class="bg-gray-800/60 p-8 rounded-2xl border border-gray-700/60 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+          <div>
+            <span class="text-xs uppercase tracking-wider text-indigo-400 font-semibold">{{ .type }}</span>
+            <h3 class="text-xl font-bold text-white mt-1">{{ .institution }}</h3>
+            <p class="text-gray-400 text-base mt-1">{{ .detail }}</p>
+          </div>
+        </div>
+        {{ end }}
+        {{ end }}
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Contact Section -->
+  <section id="contact" class="max-w-6xl mx-auto px-4 py-24 border-t border-gray-800">
+    <div class="bg-gray-900 border border-gray-800 rounded-3xl p-8 sm:p-12 max-w-4xl mx-auto relative overflow-hidden">
+      <div class="text-center max-w-xl mx-auto">
+        <h2 class="text-3xl font-extrabold text-white">Let's Connect</h2>
+        <p class="text-gray-400 mt-2">Have a project in mind or want to discuss opportunities? Drop a message below!</p>
+      </div>
+
+      <form x-data="{ sent: false, submitting: false }" 
+            @submit.prevent="submitting = true; setTimeout(() => { submitting = false; sent = true }, 1000)" 
+            class="mt-10 space-y-6 max-w-xl mx-auto">
+        <div>
+          <label class="block text-sm font-medium text-gray-300 mb-2">Your Name</label>
+          <input type="text" required class="w-full bg-gray-800/80 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-indigo-500 transition">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-300 mb-2">Your Email</label>
+          <input type="email" required class="w-full bg-gray-800/80 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-indigo-500 transition">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-300 mb-2">Message</label>
+          <textarea rows="4" required class="w-full bg-gray-800/80 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-indigo-500 transition"></textarea>
+        </div>
+
+        <button type="submit" 
+                :disabled="submitting || sent"
+                class="w-full bg-indigo-600 hover:bg-indigo-500 disabled:bg-indigo-900 text-white font-semibold py-3.5 rounded-xl transition flex justify-center items-center gap-2">
+          <span x-show="!submitting && !sent">Send Message</span>
+          <span x-show="submitting" x-cloak>Sending...</span>
+          <span x-show="sent" x-cloak class="text-green-400">✓ Message Sent Successfully!</span>
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Scroll To Top Floating Button -->
+  <button x-show="showScrollTop" 
+          x-cloak
+          @click="window.scrollTo({ top: 0, behavior: 'smooth' })"
+          x-transition
+          aria-label="Scroll to top"
+          class="fixed bottom-6 right-6 bg-indigo-600 hover:bg-indigo-500 text-white p-3.5 rounded-full shadow-xl transition-all duration-300 z-40 focus:outline-none">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+    </svg>
+  </button>
+
+  <!-- Footer -->
+  <!-- Well-Organized Footer Section -->
+  <footer class="bg-gray-950 border-t border-gray-800 text-gray-400 pt-16 pb-12">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-gray-800/80">
+        
+        <!-- Brand & Brief Bio -->
+        <div class="space-y-4 md:col-span-1">
+          <a href="#about" class="text-xl font-bold text-white tracking-tight flex items-center gap-1">
+            <span>{{ .Site.Data.portfolio.name }}</span><span class="text-indigo-400">.dev</span>
+          </a>
+          <p class="text-sm text-gray-400 leading-relaxed">
+            Full-Stack Web Developer passionate about building high-performance web applications and intuitive digital experiences.
+          </p>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-700/50 text-emerald-400 text-xs font-medium">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            Available for new projects
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h4 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Navigation</h4>
+          <ul class="space-y-2.5 text-sm">
+            <li><a href="#about" class="hover:text-indigo-400 transition">About Me</a></li>
+            <li><a href="#skills" class="hover:text-indigo-400 transition">Technical Skills</a></li>
+            <li><a href="#experience" class="hover:text-indigo-400 transition">Experience</a></li>
+            <li><a href="#projects" class="hover:text-indigo-400 transition">Featured Projects</a></li>
+            <li><a href="#education" class="hover:text-indigo-400 transition">Education & Certs</a></li>
+          </ul>
+        </div>
+
+        <!-- Tech Stack Highlight -->
+        <div>
+          <h4 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Core Tech Stack</h4>
+          <ul class="space-y-2.5 text-sm">
+            <li class="flex items-center gap-2"><span class="text-indigo-400">•</span> React / Next.js</li>
+            <li class="flex items-center gap-2"><span class="text-indigo-400">•</span> JavaScript (ES6+)</li>
+            <li class="flex items-center gap-2"><span class="text-indigo-400">•</span> Node.js & Express</li>
+            <li class="flex items-center gap-2"><span class="text-indigo-400">•</span> Tailwind CSS</li>
+            <li class="flex items-center gap-2"><span class="text-indigo-400">•</span> MongoDB / PostgreSQL</li>
+          </ul>
+        </div>
+
+        <!-- Connect / Social Links -->
+        <div>
+          <h4 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Connect</h4>
+          <p class="text-sm text-gray-400 mb-4">{{ .Site.Data.portfolio.location }}</p>
+          <div class="flex items-center gap-3">
+            <!-- GitHub Link -->
+            <a href="https://github.com/ananya2420" target="_blank" rel="noopener noreferrer" 
+               aria-label="GitHub"
+               class="w-10 h-10 rounded-xl bg-gray-900 border border-gray-800 flex items-center justify-center text-gray-300 hover:text-white hover:border-indigo-500/50 hover:bg-gray-800 transition">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+            </a>
+            <!-- LinkedIn Link -->
+            <a href="#contact" 
+               aria-label="LinkedIn"
+               class="w-10 h-10 rounded-xl bg-gray-900 border border-gray-800 flex items-center justify-center text-gray-300 hover:text-white hover:border-indigo-500/50 hover:bg-gray-800 transition">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+            </a>
+            <!-- Direct Email Link -->
+            <a href="#contact" 
+               aria-label="Email"
+               class="w-10 h-10 rounded-xl bg-gray-900 border border-gray-800 flex items-center justify-center text-gray-300 hover:text-white hover:border-indigo-500/50 hover:bg-gray-800 transition">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500">
+        <p>© 2026 {{ .Site.Data.portfolio.name }}. All rights reserved.</p>
+        <p class="flex items-center gap-1">
+          Designed & Built with Hugo & Tailwind CSS
+        </p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
